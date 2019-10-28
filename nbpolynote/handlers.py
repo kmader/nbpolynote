@@ -7,6 +7,9 @@ from notebook.utils import url_path_join as ujoin
 
 from jupyter_server_proxy.handlers import SuperviseAndProxyHandler
 import yaml
+import os
+
+POLYNOTE_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 
 class PolynoteProxyHandler(SuperviseAndProxyHandler):
@@ -14,10 +17,10 @@ class PolynoteProxyHandler(SuperviseAndProxyHandler):
 
     def get_cmd(self):
 
-        with open("polynote/config.yml", "w") as f:
+        with open(os.path.join(POLYNOTE_ROOT, "polynote", "config.yml"), "w") as f:
             yaml.dump({"port": self.port, "host": "0.0.0.0"}, stream=f)
 
-        cmd = ["polynote/polynote"]
+        cmd = [os.path.join(POLYNOTE_ROOT, "polynote", "polynote")]
         return cmd
 
     def get_env(self):

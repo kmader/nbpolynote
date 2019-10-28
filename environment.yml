@@ -15,6 +15,7 @@ dependencies:
   - pyspark
   - virtualenv
   - jupyter-server-proxy
+  - pip
   - pip:
     - black
     - jep

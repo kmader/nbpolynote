@@ -1,2 +1,7 @@
 *.tar.gz
-polynote/**
+nbpolynote/polynote/**
+nbpolynote/__pycache__
+nbpolynote.egg-info
+.DS_Store
+.ipynb_checkpoints
+notebooks/.ipynb_checkpoints
