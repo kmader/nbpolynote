@@ -23,6 +23,19 @@ class PolynoteProxyHandler(SuperviseAndProxyHandler):
     def get_env(self):
         return {}
 
+    def get_timeout(self):
+        """
+        Return timeout (in s) to wait before giving up on process readiness
+        """
+        return 30
+
+    @property
+    def port(self):
+        """
+        Hard code it initially
+        """
+        return 8192
+
 
 class AddSlashHandler(IPythonHandler):
     """Handler for adding trailing slash to URLs that need them"""
@@ -40,7 +53,7 @@ def setup_handlers(web_app):
         [
             (
                 ujoin(web_app.settings["base_url"], "polynote/(.*)"),
-                DLStudioProxyHandler,
+                PolynoteProxyHandler,
                 dict(state={}),
             ),
             (ujoin(web_app.settings["base_url"], "polynote"), AddSlashHandler),
