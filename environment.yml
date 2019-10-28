@@ -16,6 +16,7 @@ dependencies:
   - virtualenv
   - jupyter-server-proxy
   - pip
+  - openjdk=8
   - pip:
     - black
     - jep
