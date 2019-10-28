@@ -11,9 +11,10 @@ dependencies:
   - notebook>=5.2.2
   - ipywidgets>=6.0.1
   - ipython>=7.5.0
-  - jep
   - jedi
   - pyspark
   - virtualenv
+  - jupyter-server-proxy
   - pip:
     - black
+    - jep
