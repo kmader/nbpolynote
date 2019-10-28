@@ -5,16 +5,19 @@ from tornado import web
 from notebook.base.handlers import IPythonHandler
 from notebook.utils import url_path_join as ujoin
 
-from nbserverproxy.handlers import SuperviseAndProxyHandler
+from jupyter_server_proxy.handlers import SuperviseAndProxyHandler
+import yaml
 
 
-class DLStudioProxyHandler(SuperviseAndProxyHandler):
-    name = 'DLStudio'
+class PolynoteProxyHandler(SuperviseAndProxyHandler):
+    name = "Polynote"
 
     def get_cmd(self):
-        cmd = ['/home/app/start.sh',
-               '-p', str(self.port)
-               ]
+
+        with open("polynote/config.yml", "w") as f:
+            yaml.dump({"port": self.port, "host": "0.0.0.0"}, stream=f)
+
+        cmd = ["polynote/polynote"]
         return cmd
 
     def get_env(self):
@@ -23,16 +26,23 @@ class DLStudioProxyHandler(SuperviseAndProxyHandler):
 
 class AddSlashHandler(IPythonHandler):
     """Handler for adding trailing slash to URLs that need them"""
+
     @web.authenticated
     def get(self, *args):
         src = urlparse(self.request.uri)
-        dest = src._replace(path=src.path + '/')
+        dest = src._replace(path=src.path + "/")
         self.redirect(urlunparse(dest))
 
 
 def setup_handlers(web_app):
-    web_app.add_handlers('.*', [
-        (ujoin(web_app.settings['base_url'], 'dlstudio/(.*)'),
-         DLStudioProxyHandler, dict(state={})),
-        (ujoin(web_app.settings['base_url'], 'dlstudio'), AddSlashHandler)
-        ])
+    web_app.add_handlers(
+        ".*",
+        [
+            (
+                ujoin(web_app.settings["base_url"], "polynote/(.*)"),
+                DLStudioProxyHandler,
+                dict(state={}),
+            ),
+            (ujoin(web_app.settings["base_url"], "polynote"), AddSlashHandler),
+        ],
+    )

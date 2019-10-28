@@ -23,15 +23,15 @@ define(function(require) {
         /* create our list item */
         var orsession_item = $('<li>')
             .attr('role', 'presentation')
-            .addClass('new-openrefine');
+            .addClass('new-polynote');
 
         /* create our list item's link */
         var orsession_link = $('<a>')
             .attr('role', 'menuitem')
             .attr('tabindex', '-1')
-            .attr('href', base_url + 'dlstudio/')
+            .attr('href', base_url + 'polynote/')
             .attr('target', '_blank')
-            .text('Launch DeepLearningStudio');
+            .text('Launch Polynote');
 
         /* add the link to the item and
          * the item to the menu */

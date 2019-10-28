@@ -1,19 +1,20 @@
-from nbdlstudioproxy.handlers import setup_handlers
+from nbpolynote.handlers import setup_handlers
 
 
 # Jupyter Extension points
 def _jupyter_server_extension_paths():
-    return [{
-        'module': 'nbdlstudioproxy',
-    }]
+    return [{"module": "nbpolynote"}]
+
 
 def _jupyter_nbextension_paths():
-    return [{
-        "section": "tree",
-        "dest": "nbdlstudioproxy",
-        "src": "static",
-        "require": "nbdlstudioproxy/tree"
-    }]
+    return [
+        {
+            "section": "tree",
+            "dest": "nbpolynote",
+            "src": "static",
+            "require": "nbpolynote/tree",
+        }
+    ]
 
 
 def load_jupyter_server_extension(nbapp):
