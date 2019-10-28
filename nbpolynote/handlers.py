@@ -16,9 +16,9 @@ class PolynoteProxyHandler(SuperviseAndProxyHandler):
     name = "Polynote"
 
     def get_cmd(self):
-
+        config_dict = {"listen": {"port": self.port, "host": "0.0.0.0"}}
         with open(os.path.join(POLYNOTE_ROOT, "polynote", "config.yml"), "w") as f:
-            yaml.dump({"port": self.port, "host": "0.0.0.0"}, stream=f)
+            yaml.dump(config_dict, stream=f)
 
         cmd = [os.path.join(POLYNOTE_ROOT, "polynote", "polynote")]
         return cmd
@@ -31,13 +31,6 @@ class PolynoteProxyHandler(SuperviseAndProxyHandler):
         Return timeout (in s) to wait before giving up on process readiness
         """
         return 30
-
-    @property
-    def port(self):
-        """
-        Hard code it initially
-        """
-        return 8192
 
 
 class AddSlashHandler(IPythonHandler):
@@ -57,7 +50,7 @@ def setup_handlers(web_app):
             (
                 ujoin(web_app.settings["base_url"], "polynote/(.*)"),
                 PolynoteProxyHandler,
-                dict(state={}),
+                dict(state={"port": 8192}),
             ),
             (ujoin(web_app.settings["base_url"], "polynote"), AddSlashHandler),
         ],
