@@ -17,7 +17,7 @@ class PolynoteProxyHandler(SuperviseAndProxyHandler):
 
     def get_cmd(self):
         config_dict = {"listen": {"port": self.port, "host": "0.0.0.0"}}
-        config_dict["ui"] = {"base_uri": "{}polynote".format(self.base_url)}
+        config_dict["ui"] = {"base_uri": "{}polynote/".format(self.base_url)}
         with open(os.path.join(POLYNOTE_ROOT, "polynote", "config.yml"), "w") as f:
             yaml.dump(config_dict, stream=f)
 
