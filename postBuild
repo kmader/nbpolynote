@@ -6,7 +6,7 @@ cd polynote/polynote-frontend; npm install; npm run dist; cd ../..
 wget https://piccolo.link/sbt-1.3.3.zip
 unzip sbt-1.3.3.zip
 rm sbt-1.3.3.zip
-cd polynote; sbt +dist; cd ..
+cd polynote; ../sbt/bin/sbt +dist; cd ..
 cd nbpolynote; tar -xvf ../polynote/target/scala-2.11/polynote-dist.tar.gz; cd ..
 # setup notebook plugin
 python setup.py develop
