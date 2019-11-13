@@ -12,7 +12,7 @@ dependencies:
   - ipywidgets>=6.0.1
   - ipython>=7.5.0
   - jedi
-  - pyspark==2.1.2
+  - pyspark
   - virtualenv
   - jupyter-server-proxy
   - pip
