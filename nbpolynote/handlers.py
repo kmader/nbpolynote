@@ -8,6 +8,7 @@ from notebook.utils import url_path_join as ujoin
 from jupyter_server_proxy.handlers import SuperviseAndProxyHandler
 import yaml
 import os
+import sys
 
 POLYNOTE_ROOT = os.path.dirname(os.path.abspath(__file__))
 
