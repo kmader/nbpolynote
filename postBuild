@@ -1,7 +1,7 @@
 jupyter serverextension enable --py jupyter_server_proxy
 git clone https://github.com/polynote/polynote.git
-
-cd nbpolynote; tar -xvf ../polynote-dist.tar.gz; cd ..
+cd polynote/polynote-frontend; npm install; cd ../..
+# cd nbpolynote; tar -xvf ../polynote-dist.tar.gz; cd ..
 python setup.py develop
 jupyter serverextension enable  --user --py nbpolynote
 jupyter nbextension     install --user --py nbpolynote
