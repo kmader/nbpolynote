@@ -21,7 +21,7 @@ class PolynoteProxyHandler(SuperviseAndProxyHandler):
         with open(os.path.join(POLYNOTE_ROOT, "polynote", "config.yml"), "w") as f:
             yaml.dump(config_dict, stream=f)
 
-        cmd = [os.path.join(POLYNOTE_ROOT, "polynote", "polynote")]
+        cmd = ['{} {}'.format(sys.executable, os.path.join(POLYNOTE_ROOT, "polynote", "polynote.py"))]
         return cmd
 
     def get_env(self):
